@@ -298,7 +298,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44d8b4b7c32c544a4ad9f484679840ac, type: 2}
+  - {fileID: 2100000, guid: 74039f525ac9e40428d192cdab74bcdc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -354,17 +354,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296586898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eef9d883a898c441c9d481fd30a443ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 69ef7843852c04b699b81410b2525a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color1Start: {r: 1, g: 0, b: 0, a: 0}
-  color1End: {r: 1, g: 1, b: 1, a: 0}
-  color2Start: {r: 1, g: 1, b: 1, a: 0}
-  color2End: {r: 1, g: 0, b: 0, a: 0}
+  color1Start: {r: 0.54901963, g: 1, b: 0, a: 0}
+  color1End: {r: 0.31764707, g: 0, b: 1, a: 0}
+  color2Start: {r: 0.31764707, g: 0, b: 1, a: 0}
+  color2End: {r: 0.54901963, g: 1, b: 0, a: 0}
   lerpSpeed: 1
-  originDelay: 0
-  originScale: 1
-  cycleDuration: 5
+  intensityOscillationSpeed: 1
+  intensityScaleFactor1: 1
+  intensityScaleFactor2: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
