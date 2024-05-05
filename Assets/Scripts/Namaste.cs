@@ -1,30 +1,29 @@
-using Mediapipe.Unity.Holistic;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenPalm : MonoBehaviour
+public class Namaste : MonoBehaviour
 {
     public Vector3 averageRHPos, averageLHPos;
     public float clapDistThreshold, unclapDistThreshold;
-    public MakeSound soundPlayer;
+    public int pointCount; 
     private bool clapAvailable = true;
-
+    // Start is called before the first frame update
     void Start()
     {
-        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-    
-        
+        UpdateAverageHandPos();
+        CheckNamaste();
     }
-        
+
     void UpdateAverageHandPos(){
-       
+        /*positions are generally between 1(left), 0(right), 0(up), 1(down)
+        */
         Vector3 temp = new Vector3(0,0,0);
         foreach(Vector3 pos in Gesture.gen.lefthandpos){
             temp += pos;
@@ -39,10 +38,11 @@ public class OpenPalm : MonoBehaviour
         averageRHPos = temp;
     }
 
-    void CheckClap(){
+    void CheckNamaste(){
         if(clapAvailable){
+            Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
             if(Vector3.Distance(averageLHPos,averageRHPos) <= clapDistThreshold){
-                OnClap();
+                OnNamaste();
                 clapAvailable = false;
             }
         }else{
@@ -54,18 +54,13 @@ public class OpenPalm : MonoBehaviour
     }
 
     
-
-    public void OnClap(){
-        Debug.Log("CLAP");
+    public void OnNamaste(){
+        pointCount++;; 
+        Debug.Log("Point Count: " + pointCount);
         //calculate position ratio
         Vector3 clapPos = -((averageLHPos + averageRHPos)/2);
         Vector3 positionRatio = new Vector3(2*((clapPos.x) + 0.5f),2*((clapPos.y) + 0.5f), 0);
         Debug.Log(positionRatio);
-        soundPlayer.whenClap(positionRatio);
         
     }
-   
-    
 }
-
-
