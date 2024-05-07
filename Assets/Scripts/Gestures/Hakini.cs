@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 
-public class Aum : MonoBehaviour
+public class Hakini : MonoBehaviour
 {
-    public float MtToMtThreshold, PmcpToPmcpThreshold;
+    public float TtToTtThreshold, ItToItThreshold, MtToMtThreshold, RtToRtThreshold, WristToWristThresholdGreater;
     private Vector3 leftHand, rightHand;
     private bool isAvailable = true;
     private bool handsActive = false;
@@ -46,43 +46,37 @@ public class Aum : MonoBehaviour
             // Debug.Log(rightHand.y);
             // Debug.Log(rightHand.z);
             Debug.Log("Hand Distance: " + Vector3.Distance(leftHand,rightHand));
-            
-            if (Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x)
-            {
-                // Debug.Log("We're in");
-            }
         }
         timeElapsed += Time.deltaTime;
         
-        if (isAvailable)
+        if(isAvailable)
         {   
             if (handsActive &&
-               // Middle Fingers Touching
+               // Finger tips touching
+               Vector3.Distance(Gesture.gen.lefthandpos[4],Gesture.gen.righthandpos[4]) <= TtToTtThreshold &&
+               Vector3.Distance(Gesture.gen.lefthandpos[8],Gesture.gen.righthandpos[8]) <= ItToItThreshold &&
                Vector3.Distance(Gesture.gen.lefthandpos[12],Gesture.gen.righthandpos[12]) <= MtToMtThreshold &&
-               // Pinkies Touching
-               Vector3.Distance(Gesture.gen.lefthandpos[18],Gesture.gen.righthandpos[18]) <= PmcpToPmcpThreshold &&
-               // Middle Fingers raised
+               Vector3.Distance(Gesture.gen.lefthandpos[16],Gesture.gen.righthandpos[16]) <= RtToRtThreshold &&
+               // Wrists away from eachother
+               Vector3.Distance(Gesture.gen.lefthandpos[0],Gesture.gen.righthandpos[0]) >= WristToWristThresholdGreater &&
+               // Finger tips above wrist
+               Gesture.gen.lefthandpos[8].y < Gesture.gen.lefthandpos[0].y &&
+               Gesture.gen.lefthandpos[12].y < Gesture.gen.lefthandpos[0].y &&
+               Gesture.gen.lefthandpos[16].y < Gesture.gen.lefthandpos[0].y &&
+               Gesture.gen.righthandpos[8].y < Gesture.gen.righthandpos[0].y &&
+               Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[0].y &&
+               Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[0].y &&
+               // Finger tips pointed up
+               Gesture.gen.lefthandpos[8].y < Gesture.gen.lefthandpos[5].y &&
                Gesture.gen.lefthandpos[12].y < Gesture.gen.lefthandpos[9].y &&
+               Gesture.gen.lefthandpos[16].y < Gesture.gen.lefthandpos[13].y &&
+               Gesture.gen.righthandpos[8].y < Gesture.gen.righthandpos[5].y &&
                Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[9].y &&
-               // Other fingers pointed down
-               // Gesture.gen.lefthandpos[5].y < Gesture.gen.lefthandpos[8].y &&
-               Gesture.gen.lefthandpos[13].y < Gesture.gen.lefthandpos[16].y &&
-               Gesture.gen.lefthandpos[17].y < Gesture.gen.lefthandpos[19].y &&
-               // Gesture.gen.righthandpos[5].y < Gesture.gen.righthandpos[8].y &&
-               Gesture.gen.righthandpos[13].y < Gesture.gen.righthandpos[16].y &&
-               Gesture.gen.lefthandpos[17].y < Gesture.gen.righthandpos[19].y &&
-               // Fingers inside knuckles
-               Gesture.gen.lefthandpos[5].x > Gesture.gen.lefthandpos[6].x &&
-               Gesture.gen.lefthandpos[13].x > Gesture.gen.lefthandpos[14].x &&
-               Gesture.gen.lefthandpos[17].x > Gesture.gen.lefthandpos[18].x &&
-               Gesture.gen.righthandpos[5].x < Gesture.gen.righthandpos[6].x &&
-               Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x &&
-               Gesture.gen.righthandpos[17].x < Gesture.gen.righthandpos[18].x
-            )
+               Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[13].y)
                // NEED TO SEE WHY CANT GRAB PINKY TIP
             {
                 isAvailable = false;
-                Debug.Log("Checks Approved Aum");
+                Debug.Log("Checks Approved Hakini");
             }
         }
         else

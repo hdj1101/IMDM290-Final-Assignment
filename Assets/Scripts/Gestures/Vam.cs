@@ -72,7 +72,7 @@ public class Vam : MonoBehaviour
                // NEED TO SEE WHY CANT GRAB PINKY TIP
             {
                 isAvailable = false;
-                Debug.Log("Checks Approved");
+                Debug.Log("Checks Approved Vam");
             }
         }
         else
