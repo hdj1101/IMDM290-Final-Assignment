@@ -5,7 +5,7 @@ using UnityEngine;
 public class Namaste : MonoBehaviour
 {
     public Vector3 averageRHPos, averageLHPos;
-    public float clapDistThreshold, unclapDistThreshold;
+    public float unclapDistThreshold;
     public int pointCount; 
     private bool clapAvailable = true;
     // Start is called before the first frame update
@@ -39,18 +39,19 @@ public class Namaste : MonoBehaviour
     }
 
     void CheckNamaste(){
-        if(clapAvailable){
-            Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
-            if(Vector3.Distance(averageLHPos,averageRHPos) <= clapDistThreshold){
+
+        if (clapAvailable) {
+            //Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
+            if(Vector3.Distance(averageLHPos,averageRHPos) <= unclapDistThreshold){
                 OnNamaste();
                 clapAvailable = false;
             }
-        }else{
-            if(Vector3.Distance(averageLHPos,averageRHPos) > unclapDistThreshold){
+        } else {
+            if(Vector3.Distance(averageLHPos,averageRHPos) > unclapDistThreshold ){
                 clapAvailable = true;
+
             }
         }
-        
     }
 
     
@@ -61,6 +62,5 @@ public class Namaste : MonoBehaviour
         Vector3 clapPos = -((averageLHPos + averageRHPos)/2);
         Vector3 positionRatio = new Vector3(2*((clapPos.x) + 0.5f),2*((clapPos.y) + 0.5f), 0);
         Debug.Log(positionRatio);
-        
     }
 }

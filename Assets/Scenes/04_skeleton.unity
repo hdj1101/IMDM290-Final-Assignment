@@ -320,9 +320,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 148021280}
-  - component: {fileID: 148021281}
   - component: {fileID: 148021282}
   - component: {fileID: 148021283}
+  - component: {fileID: 148021284}
+  - component: {fileID: 148021285}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -345,18 +346,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &148021281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7169287e101f9d342a87b89eebb5ac7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &148021282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,8 +373,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   averageRHPos: {x: 0, y: 0, z: 0}
   averageLHPos: {x: 0, y: 0, z: 0}
-  clapDistThreshold: 0.5
-  unclapDistThreshold: 2
+  unclapDistThreshold: 0.2
+  pointCount: 0
+--- !u!114 &148021284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148021279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1389c39ed562d44d58a2f19419a1aaee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  averageRightIndexPos: {x: 0, y: 0, z: 0}
+  averageRightThumbPos: {x: 0, y: 0, z: 0}
+  averageLeftIndexPos: {x: 0, y: 0, z: 0}
+  averageLeftThumbPos: {x: 0, y: 0, z: 0}
+  distThreshold: 0.1
+  pointCount: 0
+--- !u!114 &148021285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148021279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0243ac6858689472885fcfff7615092c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  averageRightHandDist: 0
+  averageLeftHandDist: 0
+  distThreshold: 0.1
   pointCount: 0
 --- !u!1 &173192577
 GameObject:
