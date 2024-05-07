@@ -17,6 +17,7 @@ public class Skeleton : MonoBehaviour
     int[,] linePairsL = new int[,] { {4,3}, {3,2}, {2,1}, {1,0}, {8,7}, {7,6}, {6,5}, {5,0},
 {12,11}, {11,10}, {10,9}, {16,15}, {15,14}, {14,13},
 {20, 19}, {19,18}, {18,17}, {17,0}}; 
+// , {9,5}, {13, 9}, {17, 13}
 
     int[,] linePairsR = new int[,] { {4,3}, {3,2}, {2,1}, {1,0}, {8,7}, {7,6}, {6,5}, {5,0},
 {12,11}, {11,10}, {10,9}, {16,15}, {15,14}, {14,13},
@@ -58,7 +59,7 @@ public class Skeleton : MonoBehaviour
         float fl = v.magnitude;
         obj.transform.position = pos1 + v / 2;
         obj.transform.up = v;
-        obj.transform.localScale = new Vector3(distance, fl / 2, distance);
+        obj.transform.localScale = new Vector3(distance / 4, fl / 2, distance / 4);
     }
 
     Vector3 scaleVector(Vector3 v)
