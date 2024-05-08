@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 148021285}
   - component: {fileID: 148021287}
   - component: {fileID: 148021286}
+  - component: {fileID: 148021288}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -427,7 +428,7 @@ MonoBehaviour:
   averageRightThumbPos: {x: 0, y: 0, z: 0}
   averageLeftIndexPos: {x: 0, y: 0, z: 0}
   averageLeftThumbPos: {x: 0, y: 0, z: 0}
-  distThreshold: 0.1
+  distThreshold: 0.5
   pointCount: 0
 --- !u!114 &148021287
 MonoBehaviour:
@@ -443,7 +444,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   averageRightHandDist: 0
   averageLeftHandDist: 0
-  distThreshold: 0.1
+  distThreshold: 0.5
+  pointCount: 0
+--- !u!114 &148021288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148021279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b0f4c8327ba422ea6f2b57bfced651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  averageRHPos: {x: 0, y: 0, z: 0}
+  averageLHPos: {x: 0, y: 0, z: 0}
+  clapDistThreshold: 0.2
+  unclapDistThreshold: 0
   pointCount: 0
 --- !u!1 &173192577
 GameObject:
