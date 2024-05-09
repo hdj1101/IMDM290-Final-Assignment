@@ -9,7 +9,7 @@ public class Lam : MonoBehaviour, IGestureCheck, IUpdateHands
 
     public float distThreshold;
     public int pointCount; 
-    private bool clapAvailable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,15 +36,11 @@ public class Lam : MonoBehaviour, IGestureCheck, IUpdateHands
     }
 
     public bool CheckGesture(){
-        
-        if (clapAvailable) {
-            if(Vector3.Distance(averageRightIndexPos,averageRightThumbPos) <= distThreshold ||
-                Vector3.Distance(averageLeftIndexPos,averageLeftThumbPos) <= distThreshold){
-                // OnLam();
-                clapAvailable = false;
-                return true;
-            }
-        } 
+        if(Vector3.Distance(averageRightIndexPos,averageRightThumbPos) <= distThreshold ||
+            Vector3.Distance(averageLeftIndexPos,averageLeftThumbPos) <= distThreshold){
+            // OnLam();
+            return true;
+        }
 
         return false;
     }

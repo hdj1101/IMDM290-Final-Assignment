@@ -7,7 +7,7 @@ public class Namaste : MonoBehaviour, IGestureCheck, IUpdateHands
     public Vector3 averageRHPos, averageLHPos;
     public float clapDistThreshold, unclapDistThreshold;
     public int pointCount; 
-    private bool clapAvailable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,18 +40,10 @@ public class Namaste : MonoBehaviour, IGestureCheck, IUpdateHands
     }
 
     public bool CheckGesture(){
-        if(clapAvailable){
-            // Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
-            if(Vector3.Distance(averageLHPos,averageRHPos) <= clapDistThreshold){
-                // OnNamaste();
-                clapAvailable = false;
-                Debug.Log("We're in");
-                return true;
-            }
-        }else{
-            if(Vector3.Distance(averageLHPos,averageRHPos) > unclapDistThreshold){
-                clapAvailable = true;
-            }
+        // Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
+        if(Vector3.Distance(averageLHPos,averageRHPos) <= clapDistThreshold){
+            // OnNamaste();
+            return true;
         }
 
         return false;

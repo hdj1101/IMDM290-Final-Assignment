@@ -7,7 +7,7 @@ public class Aum : MonoBehaviour, IGestureCheck
 {
     public float MtToMtThreshold, PmcpToPmcpThreshold;
     private Vector3 leftHand, rightHand;
-    private bool isAvailable = true;
+
     private bool handsActive = false;
     private float timeElapsed = 0.0f;
 
@@ -39,45 +39,34 @@ public class Aum : MonoBehaviour, IGestureCheck
     public bool CheckGesture()
     {
         timeElapsed += Time.deltaTime;
-        
-        if (isAvailable)
-        {   
-            if (
-               // Middle Fingers Touching
-               Vector3.Distance(Gesture.gen.lefthandpos[12],Gesture.gen.righthandpos[12]) <= MtToMtThreshold &&
-               // Pinkies Touching
-               Vector3.Distance(Gesture.gen.lefthandpos[18],Gesture.gen.righthandpos[18]) <= PmcpToPmcpThreshold &&
-               // Middle Fingers raised
-               Gesture.gen.lefthandpos[12].y < Gesture.gen.lefthandpos[9].y &&
-               Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[9].y &&
-               // Other fingers pointed down
-               // Gesture.gen.lefthandpos[5].y < Gesture.gen.lefthandpos[8].y &&
-               Gesture.gen.lefthandpos[13].y < Gesture.gen.lefthandpos[16].y &&
-               Gesture.gen.lefthandpos[17].y < Gesture.gen.lefthandpos[19].y &&
-               // Gesture.gen.righthandpos[5].y < Gesture.gen.righthandpos[8].y &&
-               Gesture.gen.righthandpos[13].y < Gesture.gen.righthandpos[16].y &&
-               Gesture.gen.lefthandpos[17].y < Gesture.gen.righthandpos[19].y &&
-               // Fingers inside knuckles
-               Gesture.gen.lefthandpos[5].x > Gesture.gen.lefthandpos[6].x &&
-               Gesture.gen.lefthandpos[13].x > Gesture.gen.lefthandpos[14].x &&
-               Gesture.gen.lefthandpos[17].x > Gesture.gen.lefthandpos[18].x &&
-               Gesture.gen.righthandpos[5].x < Gesture.gen.righthandpos[6].x &&
-               Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x &&
-               Gesture.gen.righthandpos[17].x < Gesture.gen.righthandpos[18].x
-            )
-               // NEED TO SEE WHY CANT GRAB PINKY TIP
-            {
-                isAvailable = false;
-                // Debug.Log("Checks Approved Aum");
-                return true;
-            }
-        }
-        else
+
+        if (
+            // Middle Fingers Touching
+            Vector3.Distance(Gesture.gen.lefthandpos[12],Gesture.gen.righthandpos[12]) <= MtToMtThreshold &&
+            // Pinkies Touching
+            Vector3.Distance(Gesture.gen.lefthandpos[18],Gesture.gen.righthandpos[18]) <= PmcpToPmcpThreshold &&
+            // Middle Fingers raised
+            Gesture.gen.lefthandpos[12].y < Gesture.gen.lefthandpos[9].y &&
+            Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[9].y &&
+            // Other fingers pointed down
+            // Gesture.gen.lefthandpos[5].y < Gesture.gen.lefthandpos[8].y &&
+            Gesture.gen.lefthandpos[13].y < Gesture.gen.lefthandpos[16].y &&
+            Gesture.gen.lefthandpos[17].y < Gesture.gen.lefthandpos[19].y &&
+            // Gesture.gen.righthandpos[5].y < Gesture.gen.righthandpos[8].y &&
+            Gesture.gen.righthandpos[13].y < Gesture.gen.righthandpos[16].y &&
+            Gesture.gen.lefthandpos[17].y < Gesture.gen.righthandpos[19].y &&
+            // Fingers inside knuckles
+            Gesture.gen.lefthandpos[5].x > Gesture.gen.lefthandpos[6].x &&
+            Gesture.gen.lefthandpos[13].x > Gesture.gen.lefthandpos[14].x &&
+            Gesture.gen.lefthandpos[17].x > Gesture.gen.lefthandpos[18].x &&
+            Gesture.gen.righthandpos[5].x < Gesture.gen.righthandpos[6].x &&
+            Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x &&
+            Gesture.gen.righthandpos[17].x < Gesture.gen.righthandpos[18].x
+        )
+            // NEED TO SEE WHY CANT GRAB PINKY TIP
         {
-            // if(Vector3.Distance(leftHand,rightHand) > unDistThreshold)
-            // {
-            //     isAvailable = true;
-            // }
+            // Debug.Log("Checks Approved Aum");
+            return true;
         }
 
         return false;

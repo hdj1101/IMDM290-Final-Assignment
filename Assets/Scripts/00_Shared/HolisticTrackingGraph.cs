@@ -242,7 +242,7 @@ namespace Mediapipe.Unity.Holistic
           {
             var options = calculator.Options.GetExtension(TensorsToDetectionsCalculatorOptions.Extensions.Ext);
             options.MinScoreThresh = minDetectionConfidence;
-            Logger.LogInfo(TAG, $"Min Detection Confidence = {minDetectionConfidence}");
+            // Logger.LogInfo(TAG, $"Min Detection Confidence = {minDetectionConfidence}");
           }
         }
 
@@ -252,7 +252,7 @@ namespace Mediapipe.Unity.Holistic
           {
             var options = calculator.Options.GetExtension(ThresholdingCalculatorOptions.Extensions.Ext);
             options.Threshold = minTrackingConfidence;
-            Logger.LogInfo(TAG, $"Min Tracking Confidence = {minTrackingConfidence}");
+            // Logger.LogInfo(TAG, $"Min Tracking Confidence = {minTrackingConfidence}");
           }
         }
         return calculatorGraph.Initialize(cannonicalizedConfig);
@@ -283,7 +283,7 @@ namespace Mediapipe.Unity.Holistic
       sidePacket.Emplace("output_horizontally_flipped", new BoolPacket(outputHorizontallyFlipped));
       sidePacket.Emplace("output_vertically_flipped", new BoolPacket(outputVerticallyFlipped));
 
-      Logger.LogDebug($"output_rotation = {outputRotation}, output_horizontally_flipped = {outputHorizontallyFlipped}, output_vertically_flipped = {outputVerticallyFlipped}");
+      // Logger.LogDebug($"output_rotation = {outputRotation}, output_horizontally_flipped = {outputHorizontallyFlipped}, output_vertically_flipped = {outputVerticallyFlipped}");
 
       sidePacket.Emplace("refine_face_landmarks", new BoolPacket(refineFaceLandmarks));
       sidePacket.Emplace("model_complexity", new IntPacket((int)modelComplexity));
@@ -291,11 +291,11 @@ namespace Mediapipe.Unity.Holistic
       sidePacket.Emplace("enable_segmentation", new BoolPacket(enableSegmentation));
       sidePacket.Emplace("smooth_segmentation", new BoolPacket(smoothSegmentation));
 
-      Logger.LogInfo(TAG, $"Refine Face Landmarks = {refineFaceLandmarks}");
-      Logger.LogInfo(TAG, $"Model Complexity = {modelComplexity}");
-      Logger.LogInfo(TAG, $"Smooth Landmarks = {smoothLandmarks}");
-      Logger.LogInfo(TAG, $"Enable Segmentation = {enableSegmentation}");
-      Logger.LogInfo(TAG, $"Smooth Segmentation = {smoothSegmentation}");
+      // Logger.LogInfo(TAG, $"Refine Face Landmarks = {refineFaceLandmarks}");
+      // Logger.LogInfo(TAG, $"Model Complexity = {modelComplexity}");
+      // Logger.LogInfo(TAG, $"Smooth Landmarks = {smoothLandmarks}");
+      // Logger.LogInfo(TAG, $"Enable Segmentation = {enableSegmentation}");
+      // Logger.LogInfo(TAG, $"Smooth Segmentation = {smoothSegmentation}");
 
       return sidePacket;
     }

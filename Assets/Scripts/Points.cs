@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.WSA;
 
 public class Points : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class Points : MonoBehaviour
 
     private int randomIndex;
 
+    private int prevIndex;
+    private int prevPrevIndex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,10 @@ public class Points : MonoBehaviour
         updateList.Add(lamScript);
         updateList.Add(rudraScript);
         updateList.Add(rudraScript);
+
+        randomIndex = 0;
+        prevIndex = -1;
+        prevPrevIndex = -2;
 
         Debug.Log(scriptList[totalPoints].GetType().Name);
     }
@@ -67,16 +75,29 @@ public class Points : MonoBehaviour
                 timeElapsed = 0.0f;
                 pointAdding = false;
 
-                // Used after scripts are done
-                randomIndex = Random.Range(0, scriptList.Count);
-
-                if (totalPoints >= scriptList.Count)
+                prevPrevIndex = prevIndex;
+                if (totalPoints < scriptList.Count)
                 {
-                    Debug.Log(scriptList[randomIndex].GetType().Name);
+                    prevIndex = totalPoints;
                 }
                 else
                 {
+                    prevIndex = randomIndex;
+                }
+
+                // Used after scripts are done
+                while (randomIndex == prevIndex || randomIndex == prevPrevIndex)
+                {
+                    randomIndex = Random.Range(0, scriptList.Count);
+                }
+
+                if (totalPoints < scriptList.Count)
+                {
                     Debug.Log(scriptList[totalPoints].GetType().Name);
+                }
+                else
+                {
+                    Debug.Log(scriptList[randomIndex].GetType().Name);
                 }
             }
         }
@@ -95,23 +116,58 @@ public class Points : MonoBehaviour
         {
             updateList[totalPoints].UpdateAverageHandPos();
 
-            if (scriptList[totalPoints].CheckGesture()){
-                    totalPoints++;
-                    Debug.Log("Total Points: " + totalPoints);
-                    pointAdding = true;
+            if (scriptList[totalPoints].CheckGesture())
+            {
+                // StartCoroutine(Counter(totalPoints));
+                totalPoints++;
+                Debug.Log("Total Points: " + totalPoints);
+                pointAdding = true;
             }
         }
         else
         {
-            // Debug.Log("Done");
+            updateList[randomIndex].UpdateAverageHandPos();
 
-            // Call the CheckGesture method on the randomly chosen script
             if (scriptList[randomIndex].CheckGesture())
             {
-                totalPoints++; // Increment totalPoints if gesture is valid
+                // StartCoroutine(Counter(randomIndex));
+                totalPoints++;
                 Debug.Log("Total Points: " + totalPoints);
                 pointAdding = true;
             }
         }
     }
+
+    // IEnumerator Counter(int index)
+    // {
+    //     int waiter = 20;
+
+    //     int isConsistent = (int) waiter / 4;
+    //     int checkConsistent = 1;
+
+    //     for (int i = 0; i < waiter; i++)
+    //     {
+    //         updateList[index].UpdateAverageHandPos();
+
+    //         if (scriptList[index].CheckGesture())
+    //         {
+    //             checkConsistent++;
+    //         }
+
+    //         yield return new WaitForSeconds(1 / waiter);
+    //     }
+
+    //     if (checkConsistent >= isConsistent) 
+    //     {
+    //         totalPoints++;
+    //         Debug.Log("Total Points: " + totalPoints);
+    //         pointAdding = true;
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("You suck dawg");
+    //     }
+    // }
+
+
 }

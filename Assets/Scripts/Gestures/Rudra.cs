@@ -9,7 +9,6 @@ public class Rudra : MonoBehaviour, IGestureCheck, IUpdateHands
 
     public float distThreshold;
     public int pointCount; 
-    private bool clapAvailable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -60,21 +59,12 @@ public class Rudra : MonoBehaviour, IGestureCheck, IUpdateHands
     }
 
     public bool CheckGesture(){
-        
-        if (clapAvailable) {
-            if((averageLeftHandDist) <= distThreshold ||
-                (averageRightHandDist) <= distThreshold){
-                // OnRudra();
-                clapAvailable = false;
-                return true;
-            }
-        } else {
-            if( (averageLeftHandDist) > distThreshold ||
-                (averageRightHandDist) > distThreshold){
-                clapAvailable = true;
-
-            }
+        if((averageLeftHandDist) <= distThreshold ||
+            (averageRightHandDist) <= distThreshold){
+            // OnRudra();
+            return true;
         }
+
         return false;
     }
 
