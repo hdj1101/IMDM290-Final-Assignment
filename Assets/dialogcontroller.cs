@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class dia : MonoBehaviour
+public class dialogcontroller : MonoBehaviour
 {
     public TextMeshProUGUI DialogueText;
-    public string [] Sentences;
-    public int Index = 0;
-    public float DialougeSpeed;
+    public string[] Sentences;
+    private int Index = 0;
+    public float DialogueSpeed;
 
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -26,20 +27,20 @@ public class dia : MonoBehaviour
 
     void NextSentence()
     {
-        if(Index <= Sentences.Length - 1)
+        if (Index <= Sentences.Length - 1)
         {
-            DialogueText.text ="";
+            DialogueText.text = "";
             StartCoroutine(WriteSentence());
         }
     }
-
     IEnumerator WriteSentence()
     {
-        foreach(char Character in Sentences[Index].ToCharArray())
+        foreach (char Character in Sentences[Index].ToCharArray())
         {
             DialogueText.text += Character;
-            yield return new WaitForSeconds(DialougeSpeed);
+            yield return new WaitForSeconds(DialogueSpeed);
         }
         Index++;
     }
+
 }
