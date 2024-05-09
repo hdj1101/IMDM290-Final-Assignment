@@ -6,18 +6,22 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
+
     public GameObject dialoguePanel;
     public Text dialogueText;
     public string[] dialogue;
     private int index;
 
+
+    public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
 
-    
+
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D) && playerIsClose){
+        if(Input.GetKeyDown(KeyCode.E) && playerIsClose){
 
             if (dialoguePanel.activeInHierarchy)
             {
@@ -31,9 +35,13 @@ public class NPC : MonoBehaviour
             }
 
         }
+        if (dialogueText.text == dialogue[index])
+        {
+            contButton.SetActive(true);
+        }
     }
 
-
+    
     public void zeroText()
     {
         dialogueText.text = "";
@@ -53,6 +61,8 @@ public class NPC : MonoBehaviour
 
     public void NextLine()
     {
+        contButton.SetActive(false);
+
         if (index < dialogue.Length - 1)
         {
             index++;
@@ -83,4 +93,6 @@ public class NPC : MonoBehaviour
             zeroText();
         }
     }
+
 }
+
