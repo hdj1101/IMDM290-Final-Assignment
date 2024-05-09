@@ -493,7 +493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &559728748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -820,7 +820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1064773938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1452,8 +1452,18 @@ MonoBehaviour:
   dialoguePanel: {fileID: 559728747}
   dialogueText: {fileID: 321608078}
   dialogue:
-  - Hello!
-  - oh em gee like this works
+  - 'Hello! I''m Harvey and I''m going to be your meditative guide today. '
+  - ' Meditation is a practice that helps you focus your mind and find inner peace.
+    It involves training your attention and awareness to achieve a mentally clear
+    and emotionally calm state.  '
+  - 'When you meditate, you learn to observe your thoughts and feelings without judgment.
+    This allows you to let go of stress, anxiety, and negative emotions, and instead,
+    cultivate a sense of relaxation and well-being.  '
+  - Regular meditation can have numerous benefits for your mental and physical health.
+    It can reduce stress, improve concentration, promote emotional health, and even
+    enhance self-awareness and empathy.
+  - So, are you ready to begin your journey into meditation? Let's start by finding
+    a comfortable position and taking a few deep breaths to center ourselves.
   contButton: {fileID: 1064773937}
   wordSpeed: 0.06
   playerIsClose: 0
