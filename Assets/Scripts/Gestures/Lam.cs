@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lam : MonoBehaviour
+public class Lam : MonoBehaviour, IGestureCheck, IUpdateHands
 {
     public Vector3 averageRightIndexPos, averageRightThumbPos;
     public Vector3 averageLeftIndexPos, averageLeftThumbPos;
@@ -13,45 +13,40 @@ public class Lam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        distThreshold = 0.1f;
     }
 
     // Update is called once per frame
     //{8,7} AND {4,3}
     void Update()
     {
-        UpdateAverageRightHandPos();
-        UpdateAverageLeftHandPos();
-        CheckLam();
+        // UpdateAverageRightHandPos();
+        // UpdateAverageLeftHandPos();
     }
 
-    void UpdateAverageRightHandPos(){
-        /*positions are generally between 1(left), 0(right), 0(up), 1(down)
-        */
+    public void UpdateAverageHandPos()
+    {
+        // positions are generally between 1(left), 0(right), 0(up), 1(down)
+
         averageRightIndexPos = Gesture.gen.righthandpos[8];
         averageRightThumbPos = Gesture.gen.righthandpos[4];
-    }
-
-    void UpdateAverageLeftHandPos(){
+        
         averageLeftIndexPos = Gesture.gen.lefthandpos[8];
         averageLeftThumbPos = Gesture.gen.lefthandpos[4];
     }
 
-    void CheckLam(){
+    public bool CheckGesture(){
         
         if (clapAvailable) {
             if(Vector3.Distance(averageRightIndexPos,averageRightThumbPos) <= distThreshold ||
                 Vector3.Distance(averageLeftIndexPos,averageLeftThumbPos) <= distThreshold){
-                OnLam();
+                // OnLam();
                 clapAvailable = false;
+                return true;
             }
-        } else {
-            if( Vector3.Distance(averageRightIndexPos,averageRightThumbPos) > distThreshold ||
-                 Vector3.Distance(averageLeftIndexPos,averageLeftThumbPos) > distThreshold ){
-                clapAvailable = true;
+        } 
 
-            }
-        }
+        return false;
     }
 
     public void OnLam(){

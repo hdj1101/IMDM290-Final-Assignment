@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Namaste : MonoBehaviour
+public class Namaste : MonoBehaviour, IGestureCheck, IUpdateHands
 {
     public Vector3 averageRHPos, averageLHPos;
     public float clapDistThreshold, unclapDistThreshold;
@@ -11,17 +11,18 @@ public class Namaste : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        clapDistThreshold = 0.1f;
+        unclapDistThreshold = 0.2f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateAverageHandPos();
-        CheckNamaste();
+        // UpdateAverageHandPos();
+        // CheckNamaste();
     }
 
-    void UpdateAverageHandPos(){
+    public void UpdateAverageHandPos(){
         /*positions are generally between 1(left), 0(right), 0(up), 1(down)
         */
         Vector3 temp = new Vector3(0,0,0);
@@ -38,29 +39,33 @@ public class Namaste : MonoBehaviour
         averageRHPos = temp;
     }
 
-    void CheckNamaste(){
+    public bool CheckGesture(){
         if(clapAvailable){
-            Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
+            // Debug.Log("hand distance" + Vector3.Distance(averageLHPos,averageRHPos));
             if(Vector3.Distance(averageLHPos,averageRHPos) <= clapDistThreshold){
-                OnNamaste();
+                // OnNamaste();
                 clapAvailable = false;
+                Debug.Log("We're in");
+                return true;
             }
         }else{
             if(Vector3.Distance(averageLHPos,averageRHPos) > unclapDistThreshold){
                 clapAvailable = true;
             }
         }
+
+        return false;
         
     }
 
     
     public void OnNamaste(){
         pointCount++;; 
-        Debug.Log("Point Count: " + pointCount);
+        // Debug.Log("Point Count: " + pointCount);
         //calculate position ratio
         Vector3 clapPos = -((averageLHPos + averageRHPos)/2);
         Vector3 positionRatio = new Vector3(2*((clapPos.x) + 0.5f),2*((clapPos.y) + 0.5f), 0);
-        Debug.Log(positionRatio);
+        // Debug.Log(positionRatio);
         
     }
 }

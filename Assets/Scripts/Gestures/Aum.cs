@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 
-public class Aum : MonoBehaviour
+public class Aum : MonoBehaviour, IGestureCheck
 {
     public float MtToMtThreshold, PmcpToPmcpThreshold;
     private Vector3 leftHand, rightHand;
@@ -12,12 +12,16 @@ public class Aum : MonoBehaviour
     private float timeElapsed = 0.0f;
 
     // Start is called before the first frame update
-    void Start(){}
+    void Start()
+    {
+        MtToMtThreshold = 0.05f;
+        PmcpToPmcpThreshold = 0.1f;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        CheckGesture();
+        // CheckGesture();
         UpdateHandPos();
     }
 
@@ -32,31 +36,13 @@ public class Aum : MonoBehaviour
     }
     
     // Global position goes 0-1 right to left, 0-1 top to bottom
-    void CheckGesture()
+    public bool CheckGesture()
     {
-        if (timeElapsed >= 1)
-        {
-            timeElapsed -= 1;
-            // Debug.Log(leftHand);
-            // Debug.Log(leftHand.x);
-            // Debug.Log(leftHand.y);
-            // Debug.Log(leftHand.z);
-            // Debug.Log(rightHand);
-            // Debug.Log(rightHand.x);
-            // Debug.Log(rightHand.y);
-            // Debug.Log(rightHand.z);
-            Debug.Log("Hand Distance: " + Vector3.Distance(leftHand,rightHand));
-            
-            if (Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x)
-            {
-                // Debug.Log("We're in");
-            }
-        }
         timeElapsed += Time.deltaTime;
         
         if (isAvailable)
         {   
-            if (handsActive &&
+            if (
                // Middle Fingers Touching
                Vector3.Distance(Gesture.gen.lefthandpos[12],Gesture.gen.righthandpos[12]) <= MtToMtThreshold &&
                // Pinkies Touching
@@ -82,7 +68,8 @@ public class Aum : MonoBehaviour
                // NEED TO SEE WHY CANT GRAB PINKY TIP
             {
                 isAvailable = false;
-                Debug.Log("Checks Approved Aum");
+                // Debug.Log("Checks Approved Aum");
+                return true;
             }
         }
         else
@@ -92,6 +79,7 @@ public class Aum : MonoBehaviour
             //     isAvailable = true;
             // }
         }
-        
+
+        return false;
     }
 }

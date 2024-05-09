@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 
-public class Vam : MonoBehaviour
+public class Vam : MonoBehaviour, IGestureCheck
 {
     public float TtToTtThreshold, ItToImcpThreshold, MtToMmcpThreshold, RtToRmcpThreshold, PtToPmcpThreshold, TtToIpipThresholdLess, TtToIpipThresholdGreater;
     private Vector3 leftHand, rightHand;
@@ -12,12 +12,20 @@ public class Vam : MonoBehaviour
     private float timeElapsed = 0.0f;
 
     // Start is called before the first frame update
-    void Start(){}
+    void Start()
+    {
+        TtToTtThreshold = 0.1f;
+        ItToImcpThreshold = 0.1f;
+        MtToMmcpThreshold = 0.1f;
+        RtToRmcpThreshold = 0.1f;
+        // PtToPmcpThreshold =
+        TtToIpipThresholdLess = 0.2f;
+        TtToIpipThresholdGreater = 0.1f;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        CheckGesture();
         UpdateHandPos();
     }
 
@@ -32,26 +40,11 @@ public class Vam : MonoBehaviour
     }
     
     // Global position goes 0-1 right to left, 0-1 top to bottom
-    void CheckGesture()
-    {
-        if (timeElapsed >= 1)
-        {
-            timeElapsed -= 1;
-            // Debug.Log(leftHand);
-            // Debug.Log(leftHand.x);
-            // Debug.Log(leftHand.y);
-            // Debug.Log(leftHand.z);
-            // Debug.Log(rightHand);
-            // Debug.Log(rightHand.x);
-            // Debug.Log(rightHand.y);
-            // Debug.Log(rightHand.z);
-            // Debug.Log("Hand Distance: " + Vector3.Distance(leftHand,rightHand));
-        }
-        timeElapsed += Time.deltaTime;
-        
+    public bool CheckGesture()
+    {   
         if(isAvailable)
         {   
-            if (handsActive &&
+            if (
                // Thumbs touching
                Vector3.Distance(Gesture.gen.lefthandpos[4],Gesture.gen.righthandpos[4]) <= TtToTtThreshold &&
                // Hands cupped over each other
@@ -72,16 +65,12 @@ public class Vam : MonoBehaviour
                // NEED TO SEE WHY CANT GRAB PINKY TIP
             {
                 isAvailable = false;
-                Debug.Log("Checks Approved Vam");
+                // Debug.Log("Checks Approved Vam");
+                return true;
             }
         }
-        else
-        {
-            // if(Vector3.Distance(leftHand,rightHand) > unDistThreshold)
-            // {
-            //     isAvailable = true;
-            // }
-        }
+
+        return false;
         
     }
 }

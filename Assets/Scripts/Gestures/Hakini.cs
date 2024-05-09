@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 
-public class Hakini : MonoBehaviour
+public class Hakini : MonoBehaviour, IGestureCheck
 {
     public float TtToTtThreshold, ItToItThreshold, MtToMtThreshold, RtToRtThreshold, WristToWristThresholdGreater;
     private Vector3 leftHand, rightHand;
@@ -12,12 +12,19 @@ public class Hakini : MonoBehaviour
     private float timeElapsed = 0.0f;
 
     // Start is called before the first frame update
-    void Start(){}
+    void Start()
+    {
+        TtToTtThreshold = 0.04f;
+        ItToItThreshold = 0.04f;
+        MtToMtThreshold = 0.04f;
+        RtToRtThreshold = 0.04f;
+        WristToWristThresholdGreater = 0.25f;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        CheckGesture();
+        // CheckGesture();
         UpdateHandPos();
     }
 
@@ -32,26 +39,11 @@ public class Hakini : MonoBehaviour
     }
     
     // Global position goes 0-1 right to left, 0-1 top to bottom
-    void CheckGesture()
-    {
-        if (timeElapsed >= 1)
-        {
-            timeElapsed -= 1;
-            // Debug.Log(leftHand);
-            // Debug.Log(leftHand.x);
-            // Debug.Log(leftHand.y);
-            // Debug.Log(leftHand.z);
-            // Debug.Log(rightHand);
-            // Debug.Log(rightHand.x);
-            // Debug.Log(rightHand.y);
-            // Debug.Log(rightHand.z);
-            Debug.Log("Hand Distance: " + Vector3.Distance(leftHand,rightHand));
-        }
-        timeElapsed += Time.deltaTime;
-        
+    public bool CheckGesture()
+    {   
         if(isAvailable)
         {   
-            if (handsActive &&
+            if (
                // Finger tips touching
                Vector3.Distance(Gesture.gen.lefthandpos[4],Gesture.gen.righthandpos[4]) <= TtToTtThreshold &&
                Vector3.Distance(Gesture.gen.lefthandpos[8],Gesture.gen.righthandpos[8]) <= ItToItThreshold &&
@@ -76,16 +68,12 @@ public class Hakini : MonoBehaviour
                // NEED TO SEE WHY CANT GRAB PINKY TIP
             {
                 isAvailable = false;
-                Debug.Log("Checks Approved Hakini");
+                // Debug.Log("Checks Approved Hakini");
+                return true;
             }
         }
-        else
-        {
-            // if(Vector3.Distance(leftHand,rightHand) > unDistThreshold)
-            // {
-            //     isAvailable = true;
-            // }
-        }
+
+        return false;
         
     }
 }

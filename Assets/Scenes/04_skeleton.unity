@@ -321,12 +321,13 @@ GameObject:
   m_Component:
   - component: {fileID: 148021280}
   - component: {fileID: 148021282}
+  - component: {fileID: 148021288}
+  - component: {fileID: 148021286}
   - component: {fileID: 148021283}
   - component: {fileID: 148021284}
   - component: {fileID: 148021285}
   - component: {fileID: 148021287}
-  - component: {fileID: 148021286}
-  - component: {fileID: 148021288}
+  - component: {fileID: 148021289}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -369,7 +370,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88cff19d678824e008fa08389123b999, type: 3}
   m_Name: 
@@ -388,7 +389,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de6f77bfb60c545a2a1361ca3b4aba02, type: 3}
   m_Name: 
@@ -402,7 +403,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8189a691912b24dedbf6593434908d91, type: 3}
   m_Name: 
@@ -419,7 +420,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8651366a03ac24a24af5062c3ecdde4b, type: 3}
   m_Name: 
@@ -428,7 +429,7 @@ MonoBehaviour:
   averageRightThumbPos: {x: 0, y: 0, z: 0}
   averageLeftIndexPos: {x: 0, y: 0, z: 0}
   averageLeftThumbPos: {x: 0, y: 0, z: 0}
-  distThreshold: 0.5
+  distThreshold: 0.1
   pointCount: 0
 --- !u!114 &148021287
 MonoBehaviour:
@@ -437,7 +438,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 478330c58f22c43c4a213a86648a21ad, type: 3}
   m_Name: 
@@ -453,16 +454,35 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148021279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58b0f4c8327ba422ea6f2b57bfced651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   averageRHPos: {x: 0, y: 0, z: 0}
   averageLHPos: {x: 0, y: 0, z: 0}
-  clapDistThreshold: 0.2
-  unclapDistThreshold: 0
+  clapDistThreshold: 0.01
+  unclapDistThreshold: 0.2
   pointCount: 0
+--- !u!114 &148021289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148021279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bae3233a9f504e53b49ab6bf021d158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalPoints: 0
+  namasteScript: {fileID: 148021288}
+  lamScript: {fileID: 148021286}
+  vamScript: {fileID: 148021283}
+  aumScript: {fileID: 148021284}
+  hakiniScript: {fileID: 148021285}
+  rudraScript: {fileID: 148021287}
 --- !u!1 &173192577
 GameObject:
   m_ObjectHideFlags: 0
