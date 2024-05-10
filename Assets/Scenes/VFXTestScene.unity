@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Windlines
       objectReference: {fileID: 0}
+    - target: {fileID: 8697271739975593994, guid: 707594676df924ea2a7eafbfac1e9bc9, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -195,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 367645694}
   - component: {fileID: 367645693}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: ParticleControllerList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 545340234}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Wind/Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,6 +450,10 @@ PrefabInstance:
     - target: {fileID: 9195524312402669149, guid: 73ac7169917df411dad840b485ee85a9, type: 3}
       propertyPath: m_Name
       value: FallingLeaves
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195524312402669149, guid: 73ac7169917df411dad840b485ee85a9, type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -537,7 +545,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04, y: 0, z: 0}
-  m_LocalScale: {x: 0.46083, y: 0.46083, z: 0.46083}
+  m_LocalScale: {x: 0.46488532, y: 0.46488532, z: 0.46488532}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -565,9 +573,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1978479587}
     m_Modifications:
+    - target: {fileID: 5687937269755874884, guid: 9b095c1b901af47c89acb3de4d4b66bf, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5687937269755921954, guid: 9b095c1b901af47c89acb3de4d4b66bf, type: 3}
       propertyPath: m_Name
       value: RainLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687937269755921954, guid: 9b095c1b901af47c89acb3de4d4b66bf, type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5687937269756134238, guid: 9b095c1b901af47c89acb3de4d4b66bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -628,7 +644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978479587}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Rain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -71,7 +71,7 @@ public class AudioManager : MonoBehaviour
         if (audio != null)
         {
             audio.Play();  // Play the audio associated with the current index
-            currentAudioText.text = "Now Playing: " + audio.clip.name;  // Update the text element with the audio name
+            
         }
     }
 
@@ -91,7 +91,7 @@ public class AudioManager : MonoBehaviour
         {
             DontDestroyOnLoad(audio.gameObject);  // Ensure the AudioSource GameObject is not destroyed
             audio.Play();
-            SceneManager.LoadScene("GameScene");  // Load the new scene
+            SceneManager.LoadScene("Dialouge");  // Load the new scene
         }
     }
 }
