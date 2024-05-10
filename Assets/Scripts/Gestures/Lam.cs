@@ -9,7 +9,6 @@ public class Lam : MonoBehaviour, IGestureCheck, IUpdateHands
 
     public float distThreshold;
     public int pointCount; 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +35,26 @@ public class Lam : MonoBehaviour, IGestureCheck, IUpdateHands
     }
 
     public bool CheckGesture(){
-        if(Vector3.Distance(averageRightIndexPos,averageRightThumbPos) <= distThreshold ||
-            Vector3.Distance(averageLeftIndexPos,averageLeftThumbPos) <= distThreshold){
-            // OnLam();
-            return true;
-        }
+        
+            if(Vector3.Distance(averageRightIndexPos,averageRightThumbPos) <= distThreshold &&
+                Vector3.Distance(averageLeftIndexPos,averageLeftThumbPos) <= distThreshold &&
+               //middle tip higher than index tip 
+                Gesture.gen.lefthandpos[12].y < Gesture.gen.lefthandpos[8].y &&
+                Gesture.gen.lefthandpos[12].y < Gesture.gen.lefthandpos[4].y && 
+                Gesture.gen.lefthandpos[16].y < Gesture.gen.lefthandpos[8].y &&
+                Gesture.gen.lefthandpos[16].y < Gesture.gen.lefthandpos[4].y &&
+                Gesture.gen.lefthandpos[19].y < Gesture.gen.lefthandpos[8].y &&
+                Gesture.gen.lefthandpos[19].y < Gesture.gen.lefthandpos[4].y && 
+                Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[8].y &&
+                Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[4].y && 
+                Gesture.gen.righthandpos[16].y < Gesture.gen.righthandpos[8].y &&
+                Gesture.gen.righthandpos[16].y < Gesture.gen.righthandpos[4].y &&
+                Gesture.gen.righthandpos[19].y < Gesture.gen.righthandpos[8].y &&
+                Gesture.gen.righthandpos[19].y < Gesture.gen.righthandpos[4].y) {
+                // OnLam();
+                return true;
+            }
+        
 
         return false;
     }

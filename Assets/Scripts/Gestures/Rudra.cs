@@ -9,6 +9,7 @@ public class Rudra : MonoBehaviour, IGestureCheck, IUpdateHands
 
     public float distThreshold;
     public int pointCount; 
+    //private bool clapAvailable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +20,8 @@ public class Rudra : MonoBehaviour, IGestureCheck, IUpdateHands
     // Update is called once per frame
     void Update()
     {
-        // UpdateAverageRightHandPos();
-        // UpdateAverageLeftHandPos();
+        //UpdateAverageRightHandPos();
+       // UpdateAverageLeftHandPos();
     }
 
     public void UpdateAverageHandPos()
@@ -59,12 +60,19 @@ public class Rudra : MonoBehaviour, IGestureCheck, IUpdateHands
     }
 
     public bool CheckGesture(){
-        if((averageLeftHandDist) <= distThreshold ||
-            (averageRightHandDist) <= distThreshold){
-            // OnRudra();
-            return true;
-        }
-
+        
+            if((averageLeftHandDist) <= distThreshold &&
+                (averageRightHandDist) <= distThreshold &&
+                Gesture.gen.lefthandpos[8].y < Gesture.gen.lefthandpos[12].y &&
+                Gesture.gen.lefthandpos[8].y < Gesture.gen.lefthandpos[16].y && 
+                Gesture.gen.lefthandpos[8].y < Gesture.gen.lefthandpos[4].y &&
+                Gesture.gen.lefthandpos[19].y < Gesture.gen.lefthandpos[12].y &&
+                Gesture.gen.lefthandpos[19].y < Gesture.gen.lefthandpos[16].y &&
+                Gesture.gen.lefthandpos[19].y < Gesture.gen.lefthandpos[16].y){
+                // OnRudra();
+                return true;
+            }
+        
         return false;
     }
 
@@ -78,7 +86,7 @@ public class Rudra : MonoBehaviour, IGestureCheck, IUpdateHands
 
 
         }
-                    pointCount++;; 
+        pointCount++;; 
 
         Debug.Log("Lam Point Count: " + pointCount);
         

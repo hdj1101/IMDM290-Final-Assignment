@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   averageRHPos: {x: 0, y: 0, z: 0}
   averageLHPos: {x: 0, y: 0, z: 0}
-  clapDistThreshold: 0.01
+  clapDistThreshold: 0.1
   unclapDistThreshold: 0.2
   pointCount: 0
 --- !u!114 &148021289

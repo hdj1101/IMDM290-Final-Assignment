@@ -22,12 +22,18 @@ public class Points : MonoBehaviour
 
     private bool pointAdding = false;
 
-    private float timeElapsed = 0.0f;
+    private bool holdingPose = false;
 
     private int randomIndex;
 
     private int prevIndex;
     private int prevPrevIndex;
+
+    private float holdDuration = 2.0f;
+    
+    private float timeElapsed = 0.0f;
+    private int successfulChecks = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,14 +41,14 @@ public class Points : MonoBehaviour
         scriptList.Add(namasteScript);
         scriptList.Add(lamScript);
         scriptList.Add(vamScript);
-        scriptList.Add(aumScript);
+        // scriptList.Add(aumScript);
         scriptList.Add(hakiniScript);
         scriptList.Add(rudraScript);
 
         updateList.Add(namasteScript); // TEMP
         updateList.Add(lamScript);
         updateList.Add(lamScript);
-        updateList.Add(lamScript);
+        // updateList.Add(lamScript);
         updateList.Add(rudraScript);
         updateList.Add(rudraScript);
 
@@ -59,6 +65,10 @@ public class Points : MonoBehaviour
         if (!handsActive)
         {
             UpdateHandPos();
+        }
+        else if (holdingPose)
+        {
+            poseHolder();
         }
         else if (!pointAdding)
         {
@@ -89,6 +99,7 @@ public class Points : MonoBehaviour
                 while (randomIndex == prevIndex || randomIndex == prevPrevIndex)
                 {
                     randomIndex = Random.Range(0, scriptList.Count);
+                    Debug.Log("Random: " + randomIndex);
                 }
 
                 if (totalPoints < scriptList.Count)
@@ -118,10 +129,8 @@ public class Points : MonoBehaviour
 
             if (scriptList[totalPoints].CheckGesture())
             {
-                // StartCoroutine(Counter(totalPoints));
-                totalPoints++;
-                Debug.Log("Total Points: " + totalPoints);
-                pointAdding = true;
+                holdingPose = true;
+                Debug.Log("Holding " + scriptList[totalPoints].GetType().Name);
             }
         }
         else
@@ -130,13 +139,60 @@ public class Points : MonoBehaviour
 
             if (scriptList[randomIndex].CheckGesture())
             {
-                // StartCoroutine(Counter(randomIndex));
-                totalPoints++;
-                Debug.Log("Total Points: " + totalPoints);
-                pointAdding = true;
+                holdingPose = true;
+                Debug.Log("Holding " + scriptList[randomIndex].GetType().Name);
             }
         }
     }
+
+    void poseHolder()
+    {
+        if (timeElapsed < holdDuration)
+        {
+            if (totalPoints < scriptList.Count)
+            {
+                updateList[totalPoints].UpdateAverageHandPos();
+
+                if (scriptList[totalPoints].CheckGesture())
+                {
+                    successfulChecks++;
+                }
+            }
+            else
+            {
+                updateList[randomIndex].UpdateAverageHandPos();
+
+                if (scriptList[randomIndex].CheckGesture())
+                {
+                    successfulChecks++;
+                }
+            }
+
+            timeElapsed += Time.deltaTime;
+        }
+        else
+        {
+            if (successfulChecks >= 20)
+            {
+                // StartCoroutine(Counter(totalPoints));
+                totalPoints++;
+                Debug.Log("Total Points: " + totalPoints);
+                pointAdding = true;
+                
+                holdingPose = false;
+
+                timeElapsed = 0.0f;
+            }
+            else
+            {
+                Debug.Log("Try again");
+                
+                holdingPose = false;
+
+                timeElapsed = 0.0f;
+            }
+        }
+    }    
 
     // IEnumerator Counter(int index)
     // {

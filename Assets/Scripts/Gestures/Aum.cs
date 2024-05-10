@@ -14,8 +14,8 @@ public class Aum : MonoBehaviour, IGestureCheck
     // Start is called before the first frame update
     void Start()
     {
-        MtToMtThreshold = 0.05f;
-        PmcpToPmcpThreshold = 0.1f;
+        MtToMtThreshold = 0.75f;
+        PmcpToPmcpThreshold = 0.15f;
     }
 
     // Update is called once per frame
@@ -50,17 +50,17 @@ public class Aum : MonoBehaviour, IGestureCheck
             Gesture.gen.righthandpos[12].y < Gesture.gen.righthandpos[9].y &&
             // Other fingers pointed down
             // Gesture.gen.lefthandpos[5].y < Gesture.gen.lefthandpos[8].y &&
-            Gesture.gen.lefthandpos[13].y < Gesture.gen.lefthandpos[16].y &&
+            // Gesture.gen.lefthandpos[13].y < Gesture.gen.lefthandpos[16].y &&
             Gesture.gen.lefthandpos[17].y < Gesture.gen.lefthandpos[19].y &&
             // Gesture.gen.righthandpos[5].y < Gesture.gen.righthandpos[8].y &&
-            Gesture.gen.righthandpos[13].y < Gesture.gen.righthandpos[16].y &&
-            Gesture.gen.lefthandpos[17].y < Gesture.gen.righthandpos[19].y &&
+            // Gesture.gen.righthandpos[13].y < Gesture.gen.righthandpos[16].y &&
+            Gesture.gen.righthandpos[17].y < Gesture.gen.righthandpos[19].y &&
             // Fingers inside knuckles
-            Gesture.gen.lefthandpos[5].x > Gesture.gen.lefthandpos[6].x &&
-            Gesture.gen.lefthandpos[13].x > Gesture.gen.lefthandpos[14].x &&
+            // Gesture.gen.lefthandpos[5].x > Gesture.gen.lefthandpos[6].x &&
+            // Gesture.gen.lefthandpos[13].x > Gesture.gen.lefthandpos[14].x &&
             Gesture.gen.lefthandpos[17].x > Gesture.gen.lefthandpos[18].x &&
-            Gesture.gen.righthandpos[5].x < Gesture.gen.righthandpos[6].x &&
-            Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x &&
+            // Gesture.gen.righthandpos[5].x < Gesture.gen.righthandpos[6].x &&
+            // Gesture.gen.righthandpos[13].x < Gesture.gen.righthandpos[14].x &&
             Gesture.gen.righthandpos[17].x < Gesture.gen.righthandpos[18].x
         )
             // NEED TO SEE WHY CANT GRAB PINKY TIP
