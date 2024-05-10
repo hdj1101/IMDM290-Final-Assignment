@@ -63,7 +63,8 @@ public class Skeleton : MonoBehaviour
         float fl = v.magnitude;
         obj.transform.position = pos1 + v / 2;
         obj.transform.up = v;
-        obj.transform.localScale = new Vector3(distance / 4, fl / 2, distance / 4);
+        obj.transform.localScale = new Vector3(distance / 8, fl / 2, distance / 8);
+        SetSortingLayer(obj);
     }
 
     Vector3 scaleVector(Vector3 v)
@@ -101,8 +102,6 @@ public class Skeleton : MonoBehaviour
                 pos1 = scaleVector(pos1);
                 pos2 = scaleVector(pos2);
                 placeCapsule(capsuleContainerL[i], pos1, pos2, .7f);
-                SetSortingLayer(capsuleContainerL[i]);
-
             }
         }
         // Righthand skeleton draw
@@ -118,8 +117,6 @@ public class Skeleton : MonoBehaviour
                 pos1 = scaleVector(pos1);
                 pos2 = scaleVector(pos2);
                 placeCapsule(capsuleContainerR[i], pos1, pos2, .7f);
-                SetSortingLayer(capsuleContainerR[i]);
-
             }
         }
 
