@@ -28,6 +28,10 @@ public class Skeleton : MonoBehaviour
     private const int HAND_INDEX = 0; // Adjust index based on your specific landmark data
     private const float FINGER_ANGLE_THRESHOLD = 20f; 
 
+    // Sorting layer and order
+    public string sortingLayerName = "Foreground";
+    public int sortingOrder = 0;
+
     private void Awake()
     {
     }
@@ -69,6 +73,16 @@ public class Skeleton : MonoBehaviour
         return scaled;
     }
 
+    private void SetSortingLayer(GameObject capsule)
+    {
+        Renderer renderer = capsule.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.sortingLayerName = sortingLayerName;
+            renderer.sortingOrder = sortingOrder;
+        }
+    }
+
         
 
 
@@ -87,6 +101,8 @@ public class Skeleton : MonoBehaviour
                 pos1 = scaleVector(pos1);
                 pos2 = scaleVector(pos2);
                 placeCapsule(capsuleContainerL[i], pos1, pos2, .7f);
+                SetSortingLayer(capsuleContainerL[i]);
+
             }
         }
         // Righthand skeleton draw
@@ -102,6 +118,8 @@ public class Skeleton : MonoBehaviour
                 pos1 = scaleVector(pos1);
                 pos2 = scaleVector(pos2);
                 placeCapsule(capsuleContainerR[i], pos1, pos2, .7f);
+                SetSortingLayer(capsuleContainerR[i]);
+
             }
         }
 
