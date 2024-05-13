@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Dialogue1
   m_EditorClassIdentifier: 
   RootNode:
+<<<<<<< Updated upstream
     dialogueText: What can I help you with today?
+=======
+    dialogueText: What can I help you with today? (select a button)
+>>>>>>> Stashed changes
     responses:
     - responseText: Green Treatment
       nextNode:
@@ -21,13 +25,31 @@ MonoBehaviour:
         responses:
         - responseText: thanks!
           nextNode:
+<<<<<<< Updated upstream
             dialogueText: 
             responses: []
+=======
+            dialogueText: click ENTER to continue
+            responses:
+            - responseText: 
+              nextNode:
+                dialogueText: 
+                responses: []
+>>>>>>> Stashed changes
     - responseText: 'Blue Treatment '
       nextNode:
         dialogueText: Good choice! Lets get started shall we?
         responses:
         - responseText: Yes! Lets!
           nextNode:
+<<<<<<< Updated upstream
             dialogueText: 
             responses: []
+=======
+            dialogueText: click ENTER to continue
+            responses:
+            - responseText: 
+              nextNode:
+                dialogueText: 
+                responses: []
+>>>>>>> Stashed changes

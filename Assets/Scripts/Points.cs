@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.WSA;
 
 public class Points : MonoBehaviour
 {
     public int totalPoints;
+
+    public string poseName = "Namaste";
 
     public Namaste namasteScript;
     public Lam lamScript;
@@ -22,18 +23,9 @@ public class Points : MonoBehaviour
 
     private bool pointAdding = false;
 
-    private bool holdingPose = false;
+    private float timeElapsed = 0.0f;
 
     private int randomIndex;
-
-    private int prevIndex;
-    private int prevPrevIndex;
-
-    private float holdDuration = 2.0f;
-    
-    private float timeElapsed = 0.0f;
-    private int successfulChecks = 0;
-
 
     // Start is called before the first frame update
     void Start()
@@ -48,15 +40,12 @@ public class Points : MonoBehaviour
         updateList.Add(namasteScript); // TEMP
         updateList.Add(lamScript);
         updateList.Add(lamScript);
-        // updateList.Add(lamScript);
+        updateList.Add(lamScript);
         updateList.Add(rudraScript);
         updateList.Add(rudraScript);
-
-        randomIndex = 0;
-        prevIndex = -1;
-        prevPrevIndex = -2;
 
         Debug.Log(scriptList[totalPoints].GetType().Name);
+        poseName = scriptList[totalPoints].GetType().Name;
     }
 
     // Update is called once per frame
@@ -65,10 +54,6 @@ public class Points : MonoBehaviour
         if (!handsActive)
         {
             UpdateHandPos();
-        }
-        else if (holdingPose)
-        {
-            poseHolder();
         }
         else if (!pointAdding)
         {
@@ -85,30 +70,18 @@ public class Points : MonoBehaviour
                 timeElapsed = 0.0f;
                 pointAdding = false;
 
-                prevPrevIndex = prevIndex;
-                if (totalPoints < scriptList.Count)
-                {
-                    prevIndex = totalPoints;
-                }
-                else
-                {
-                    prevIndex = randomIndex;
-                }
-
                 // Used after scripts are done
-                while (randomIndex == prevIndex || randomIndex == prevPrevIndex)
-                {
-                    randomIndex = Random.Range(0, scriptList.Count);
-                    Debug.Log("Random: " + randomIndex);
-                }
+                randomIndex = Random.Range(0, scriptList.Count);
 
-                if (totalPoints < scriptList.Count)
-                {
-                    Debug.Log(scriptList[totalPoints].GetType().Name);
-                }
-                else
+                if (totalPoints >= scriptList.Count)
                 {
                     Debug.Log(scriptList[randomIndex].GetType().Name);
+                    poseName = scriptList[randomIndex].GetType().Name;
+                }
+                else
+                {
+                    Debug.Log(scriptList[totalPoints].GetType().Name);
+                    poseName = scriptList[totalPoints].GetType().Name;
                 }
             }
         }
@@ -127,103 +100,25 @@ public class Points : MonoBehaviour
         {
             updateList[totalPoints].UpdateAverageHandPos();
 
-            if (scriptList[totalPoints].CheckGesture())
-            {
-                holdingPose = true;
-                Debug.Log("Holding " + scriptList[totalPoints].GetType().Name);
+            if (scriptList[totalPoints].CheckGesture()){
+                    totalPoints++;
+                    Debug.Log("Total Points: " + totalPoints);
+                    pointAdding = true;
             }
         }
         else
         {
+            // Debug.Log("Done");
+
             updateList[randomIndex].UpdateAverageHandPos();
 
+            // Call the CheckGesture method on the randomly chosen script
             if (scriptList[randomIndex].CheckGesture())
             {
-                holdingPose = true;
-                Debug.Log("Holding " + scriptList[randomIndex].GetType().Name);
+                totalPoints++; // Increment totalPoints if gesture is valid
+                Debug.Log("Total Points: " + totalPoints);
+                pointAdding = true;
             }
         }
     }
-
-    void poseHolder()
-    {
-        if (timeElapsed < holdDuration)
-        {
-            if (totalPoints < scriptList.Count)
-            {
-                updateList[totalPoints].UpdateAverageHandPos();
-
-                if (scriptList[totalPoints].CheckGesture())
-                {
-                    successfulChecks++;
-                }
-            }
-            else
-            {
-                updateList[randomIndex].UpdateAverageHandPos();
-
-                if (scriptList[randomIndex].CheckGesture())
-                {
-                    successfulChecks++;
-                }
-            }
-
-            timeElapsed += Time.deltaTime;
-        }
-        else
-        {
-            if (successfulChecks >= 20)
-            {
-                // StartCoroutine(Counter(totalPoints));
-                totalPoints++;
-                Debug.Log("Total Points: " + totalPoints);
-                pointAdding = true;
-                
-                holdingPose = false;
-
-                timeElapsed = 0.0f;
-            }
-            else
-            {
-                Debug.Log("Try again");
-                
-                holdingPose = false;
-
-                timeElapsed = 0.0f;
-            }
-        }
-    }    
-
-    // IEnumerator Counter(int index)
-    // {
-    //     int waiter = 20;
-
-    //     int isConsistent = (int) waiter / 4;
-    //     int checkConsistent = 1;
-
-    //     for (int i = 0; i < waiter; i++)
-    //     {
-    //         updateList[index].UpdateAverageHandPos();
-
-    //         if (scriptList[index].CheckGesture())
-    //         {
-    //             checkConsistent++;
-    //         }
-
-    //         yield return new WaitForSeconds(1 / waiter);
-    //     }
-
-    //     if (checkConsistent >= isConsistent) 
-    //     {
-    //         totalPoints++;
-    //         Debug.Log("Total Points: " + totalPoints);
-    //         pointAdding = true;
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("You suck dawg");
-    //     }
-    // }
-
-
 }

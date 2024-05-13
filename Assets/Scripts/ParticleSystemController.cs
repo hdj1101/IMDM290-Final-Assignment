@@ -42,11 +42,11 @@ public class ParticleSystemController : MonoBehaviour
             }
 
         }
-        else if (!weatherPlaying && timeElapsed >= 5)
+        else if (!weatherPlaying && timeElapsed >= 10)
         {
-            timeElapsed -= 5;
+            timeElapsed -= 10;
 
-            int prob = Random.Range(0, + particlesToControl.Length);
+            int prob = Random.Range(0,2 + particlesToControl.Length);
 
             Debug.Log("Number: " + prob);
 
